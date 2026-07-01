@@ -9,7 +9,7 @@ services:
       - DOCKER_HOST=unix:///var/run/docker.sock
       - LOCALSTACK_AUTH_TOKEN=${LOCALSTACK_AUTH_TOKEN}
       - LOCALSTACK_HOST=localstack
-      - LOCALSTACK_SERVICES=${LOCALSTACK_SERVICES-s3,sqs,lambda,cloudwatch,cloudformation,sts,iam,dynamodb}
+      - LOCALSTACK_SERVICES=${LOCALSTACK_SERVICES:-s3,sqs,lambda,cloudwatch,cloudformation,sts,iam,dynamodb,events,logs}
       - LOCALSTACK_EDGE_PORT=4566
       - DEFAULT_REGION=us-east-1
       - DATA_DIR=/tmp/localstack/data

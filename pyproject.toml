@@ -1,4 +1,5 @@
 [tool.poetry]
+package-mode = false
 name = "LSTM_Predictable_Actions"
 version = "0.1.0"
 description = "Pipeline automatizado de predição de ações com PyTorch, LocalStack e MLflow"
@@ -12,6 +13,7 @@ yfinance = "0.2.36"
 pandas = "2.2.0"
 scikit-learn = "1.4.0"
 numpy = ">=1.26,<2.0"
+boto3 = "^1.43.38"
 
 [build-system]
 requires = ["poetry-core"]
