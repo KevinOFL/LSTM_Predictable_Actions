@@ -10,6 +10,8 @@ infra/environments/local/.terraform.lock.hcl
 *.zip
 infra/environments/local/terraform.tfstate.backup
 infra/environments/local/terraform.tfstate
+output.json
+.vscode/settings.json
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
