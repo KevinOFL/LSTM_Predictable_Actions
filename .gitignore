@@ -1,7 +1,15 @@
 # Documentos do projeto
 /localstack_data/
 /mlflow_data/
-
+*anotacoes.txt
+infra/environments/local/lambda_yfinance/*
+!infra/environments/local/lambda_yfinance/requirements.txt
+!infra/environments/local/lambda_yfinance/cap_yfinance.py
+infra/environments/local/.terraform/
+infra/environments/local/.terraform.lock.hcl
+*.zip
+infra/environments/local/terraform.tfstate.backup
+infra/environments/local/terraform.tfstate
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
