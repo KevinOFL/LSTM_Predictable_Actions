@@ -45,7 +45,7 @@ resource "aws_lambda_function" "yfinance_extractor" {
 resource "aws_cloudwatch_event_rule" "daily_extraction" {
   name                = "trigger-yfinance-daily"
   description         = "Dispara a coleta do yfinance de segunda a sexta as 18h"
-  schedule_expression = "cron(10 18 ? * MON-FRI *)" 
+  schedule_expression = "cron(10 21 ? * MON-FRI *)" 
 }
 
 # Conectar a regra à Lambda
