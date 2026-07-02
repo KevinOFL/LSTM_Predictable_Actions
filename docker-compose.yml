@@ -1,0 +1,72 @@
+services:
+  localstack:
+    image: localstack/localstack:latest
+    container_name: "${LOCALSTACK_DOCKER_NAME-localstack_main}"
+    ports:
+      - "4566:4566"            # LocalStack Gateway
+      - "4510-4559:4510-4559"  # external services port range
+    environment:
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - LOCALSTACK_AUTH_TOKEN=${LOCALSTACK_AUTH_TOKEN}
+      - LOCALSTACK_HOST=localstack
+      - LOCALSTACK_SERVICES=${LOCALSTACK_SERVICES:-s3,sqs,lambda,cloudwatch,cloudformation,sts,iam,dynamodb,events,logs}
+      - LOCALSTACK_EDGE_PORT=4566
+      - DEFAULT_REGION=us-east-1
+      - DATA_DIR=/tmp/localstack/data
+    volumes:
+      - ./localstack_data:/var/lib/localstack
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    networks:
+      - localstack-network
+
+  jupyter_pytorch:
+    build: .
+    container_name: pytorch_dev_gpu
+    ports:
+      - "8888:8888"
+    environment:
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+      - AWS_DEFAULT_REGION=us-east-1
+      - AWS_ENDPOINT_URL=http://localstack:4566
+      - PYTHONPATH=/home/jovyan/work
+    volumes:
+      - .:/home/jovyan/work
+    networks:
+      - localstack-network
+    depends_on:
+      - localstack
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:latest
+    container_name: mlflow_server
+    ports:
+      - "5000:5000"
+    environment:
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+      - AWS_DEFAULT_REGION=us-east-1
+      - AWS_ENDPOINT_URL=http://localstack:4566
+    volumes:
+      - ./mlflow_data:/mlflow
+    networks:
+      - localstack-network
+    depends_on:
+      - localstack
+    command: >
+      mlflow server 
+      --backend-store-uri sqlite:///mlflow/mlflow.db 
+      --default-artifact-root s3://mlflow-artifacts/ 
+      --host 0.0.0.0 
+      --port 5000
+
+networks:
+  localstack-network:
+    driver: bridge

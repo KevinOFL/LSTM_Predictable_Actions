@@ -1,0 +1,20 @@
+[tool.poetry]
+package-mode = false
+name = "LSTM_Predictable_Actions"
+version = "0.1.0"
+description = "Pipeline automatizado de predição de ações com PyTorch, LocalStack e MLflow"
+authors = ["kevin da Silva Nunes Amaral <kevinsilvaofl@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.11"
+mlflow = "^3.14.0"
+yfinance = "0.2.36"
+pandas = "2.2.0"
+scikit-learn = "1.4.0"
+numpy = ">=1.26,<2.0"
+boto3 = "^1.43.38"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
