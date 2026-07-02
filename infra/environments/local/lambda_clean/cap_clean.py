@@ -1,8 +1,8 @@
 import boto3
 import pandas as pd
-import io
 import urllib.parse
 import fastparquet
+import numpy as np
 
 # Configuração para o LocalStack
 s3_client = boto3.client(
@@ -110,7 +110,7 @@ def handler(event, context):
             ]
         ]
         # Retirada de valores nulos do DataFrame resultante
-        df_clean.dropna(inplace=True)
+        df_clean = df_clean.replace([np.inf, -np.inf], np.nan)
 
         print("Salvando em Parquet...")
         fastparquet.write(parquet_tmp, df_clean)
