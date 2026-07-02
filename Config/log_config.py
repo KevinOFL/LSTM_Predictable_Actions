@@ -3,18 +3,18 @@ import os
 import sys
 
 
-def configure_logger(aplication_name: str) -> logging.Logger:
+def configure_logger(application_name: str) -> logging.Logger:
     """
     Configura um logger para a aplicação, permitindo o registro de mensagens de log em um arquivo e no console.
 
     parâmetros:
-    - aplication_name (str): O nome da aplicação, usado para nomear o arquivo de log.
+    - application_name (str): O nome da aplicação, usado para nomear o arquivo de log.
 
     retorno:
     - logging.Logger: O logger configurado para a aplicação.
     """
 
-    logger = logging.getLogger(aplication_name)
+    logger = logging.getLogger(application_name)
     logger.setLevel(logging.DEBUG)
 
     if not logger.handlers:
@@ -23,7 +23,7 @@ def configure_logger(aplication_name: str) -> logging.Logger:
         )
 
         base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        log_path = os.path.join(base_dir, "logs", f"{aplication_name}.log")
+        log_path = os.path.join(base_dir, "logs", f"{application_name}.log")
 
         # Garante que a pasta logs existe
         os.makedirs(os.path.dirname(log_path), exist_ok=True)
