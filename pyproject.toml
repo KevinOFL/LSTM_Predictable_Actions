@@ -7,7 +7,7 @@ authors = ["kevin da Silva Nunes Amaral <kevinsilvaofl@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = ">=3.11"
 mlflow = "^3.14.0"
 yfinance = "0.2.36"
 pandas = "2.2.0"
