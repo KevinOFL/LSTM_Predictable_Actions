@@ -22,6 +22,6 @@ provider "aws" {
     iam    = "http://localhost:4566"
     lambda = "http://localhost:4566"
     sts    = "http://localhost:4566"
-    cloudwatchevents = "http://localhost:4566"
+    events = "http://localhost:4566"
   }
 }
