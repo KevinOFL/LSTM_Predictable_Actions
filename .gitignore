@@ -5,6 +5,9 @@
 infra/environments/local/lambda_yfinance/*
 !infra/environments/local/lambda_yfinance/requirements.txt
 !infra/environments/local/lambda_yfinance/cap_yfinance.py
+infra/environments/local/lambda_clean/*
+!infra/environments/local/lambda_clean/requirements.txt
+!infra/environments/local/lambda_clean/cap_clean.py
 infra/environments/local/.terraform/
 infra/environments/local/.terraform.lock.hcl
 *.zip
