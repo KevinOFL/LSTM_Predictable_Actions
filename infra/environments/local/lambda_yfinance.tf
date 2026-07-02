@@ -44,7 +44,7 @@ resource "aws_lambda_function" "yfinance_extractor" {
 # A Regra do EventBridge (O Relógio)
 resource "aws_cloudwatch_event_rule" "daily_extraction" {
   name                = "trigger-yfinance-daily"
-  description         = "Dispara a coleta do yfinance de segunda a sexta as 18h"
+  description         = "Dispara a coleta do yfinance de segunda a sexta às 21:10 (UTC)"
   schedule_expression = "cron(10 21 ? * MON-FRI *)" 
 }
 
